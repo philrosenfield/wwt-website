@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -203,8 +203,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SessionAuthenticationConfig.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="AutoMapperSettings.cs" />
     <Compile Include="ConfigReader.cs" />
     <Compile Include="Constants.cs" />
@@ -531,14 +529,6 @@
     <Compile Include="ViewModels\TopCategoryViewModel.cs" />
     <Compile Include="ViewModels\UploadAssetViewModel.cs" />
     <Compile Include="ViewModels\VideoDataViewModel.cs" />
-    <Compile Include="webclient\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="webclient\login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebServices\IResourceService.cs" />
     <Compile Include="WebServices\LiveIdAuth.svc.cs">
       <DependentUpon>LiveIdAuth.svc</DependentUpon>
@@ -914,7 +904,6 @@
     <Content Include="webclient\dataproxy\Places.js" />
     <Content Include="webclient\dataproxy\SearchData.js" />
     <Content Include="webclient\dataproxy\Tours.js" />
-    <Content Include="webclient\Default.aspx" />
     <Content Include="webclient\directives\ContextMenu.js" />
     <Content Include="webclient\directives\editslidevalues.js" />
     <Content Include="webclient\directives\Localize.js" />
@@ -1027,7 +1016,6 @@
     <Content Include="webclient\images\uranus.jpg" />
     <Content Include="webclient\images\venus.jpg" />
     <Content Include="webclient\images\wwtlogo.png" />
-    <Content Include="webclient\login.aspx" />
     <Content Include="webclient\sdk.js" />
     <Content Include="webclient\sdk\wwtsdk.js" />
     <Content Include="webclient\sdk\wwtsdk.min.js" />
