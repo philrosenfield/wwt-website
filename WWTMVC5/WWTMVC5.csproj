@@ -538,6 +538,7 @@
     <Compile Include="WebServices\ServiceBase.cs" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\addview.png" />
+    <Content Include="Content\images\gbox.png" />
     <Content Include="Content\images\layoutpage.png" />
     <Content Include="Content\images\solutionexplorer.png" />
     <Content Include="Content\Views\EditCommunity.html" />
@@ -1314,7 +1315,7 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>cd $(TargetDir)  
+    <PreBuildEvent>cd $(TargetDir)
 setlocal enableDelayedExpansion
 (
   xcopy ..\References\msshrtmi.dll $(TargetDir)

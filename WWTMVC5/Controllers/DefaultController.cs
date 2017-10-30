@@ -31,35 +31,21 @@ namespace WWTMVC5.Controllers
         private static readonly string[] ViewGroups = new string[]
         {
             "about",
-            "blog",
-            "community",
-            "developers",
             "download",
-            "educators",
-            "explorers",
-            "eyewire",
             "getinvolved",
             "home",
-            "interact",
-            "layerscape",
             "learn",
-            "museums",
-            "news",
-            "openwwt",
-            "planetariums",
             "profile",
             "researchers",
             "support",
             "terms",
             "upgrade",
-            "use",
-            "wwtinaction",
-            "wwtstories"
+            "use"
         };
-    
+
         public async Task<ActionResult> Index()
         {
-            return await GetViewOrRedirect(string.Empty,"index", _baseModel);
+            return await GetViewOrRedirect(string.Empty, "index", _baseModel);
         }
 
         [AllowAnonymous]
@@ -75,7 +61,7 @@ namespace WWTMVC5.Controllers
                     Status = "Connected",
                     Session = new
                     {
-                        
+
                         User = SessionWrapper.Get<string>("CurrentUserProfileName")
                     },
 
@@ -93,7 +79,7 @@ namespace WWTMVC5.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        
+
         [Route("LiveId/AuthenticateFromCode/{code}")]
         public async Task<ActionResult> AuthenticateFromCode(string code)
         {
@@ -134,8 +120,8 @@ namespace WWTMVC5.Controllers
         public ActionResult Logout()
         {
             var svc = new LiveIdAuth();
-            var url =  svc.GetLogoutUrl("http://" + Request.Headers.Get("host")); 
-            
+            var url = svc.GetLogoutUrl("http://" + Request.Headers.Get("host"));
+
             SessionWrapper.Clear();
             var refreshTokenCookie = Response.Cookies["refresh_token"];
             var accessTokenCookie = Response.Cookies["access_token"];
@@ -149,8 +135,8 @@ namespace WWTMVC5.Controllers
                 accessTokenCookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(accessTokenCookie);
             }
-            
-            return Redirect(url); 
+
+            return Redirect(url);
         }
 
         [Route("{group}/{page=Index}")]
@@ -168,7 +154,7 @@ namespace WWTMVC5.Controllers
                 }
                 if (page.Contains(".msi") || (page.ToLower() == "error" && Request.RawUrl.Contains(".msi")))
                 {
-                    return await GetViewOrRedirect("download","index", _baseModel);
+                    return await GetViewOrRedirect("download", "index", _baseModel);
                 }
                 if (group.ToLower() == "community" && page.ToLower() == "profile" && _baseModel.User == null)
                 {
@@ -178,7 +164,7 @@ namespace WWTMVC5.Controllers
                         _baseModel.User = SessionWrapper.Get<ProfileDetails>("ProfileDetails");
                         return await GetViewOrRedirect(group, page, _baseModel);
                     }
-                    
+
                     return Redirect("/Community");
                 }
                 ViewBag.page = page = GetQsPage(page);
@@ -192,7 +178,7 @@ namespace WWTMVC5.Controllers
                 return View("~/Views/Support/Error.cshtml", _baseModel);
             }
         }
-        
+
         /// <summary>
         /// All web page views go through this function - it ensures we are not in openwwt land - which should only display a kiosk
         /// </summary>
@@ -204,7 +190,7 @@ namespace WWTMVC5.Controllers
         {
             model.IsOpenWwtKiosk = Request.Headers.Get("host").ToLower().Contains("openwwt.org");
 
-            
+
 
             if (model.IsOpenWwtKiosk && group.ToLower() != "openwwt")
             {
@@ -221,7 +207,8 @@ namespace WWTMVC5.Controllers
                         page = "";
                     }
                     var strippedUrl = group + "/" + page;
-                    if (strippedUrl == "/") {
+                    if (strippedUrl == "/")
+                    {
                         strippedUrl = "/home";
                     }
                     //redirect strips gnarly looking code from qs
@@ -232,7 +219,8 @@ namespace WWTMVC5.Controllers
                     model.User = await TryAuthenticateFromAuthCode("");
                 }
             }
-            if (group == string.Empty) {
+            if (group == string.Empty)
+            {
                 var homeCookie = Request.Cookies["homepage"];
                 var rootDir = homeCookie == null || string.IsNullOrEmpty(homeCookie.Value) ? "webclient" : homeCookie.Value;
                 return Redirect(rootDir);
